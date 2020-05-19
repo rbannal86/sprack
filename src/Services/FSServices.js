@@ -11,12 +11,20 @@ const defaultSpices = [
 ];
 
 const FSServices = {
-  async listenForLogin() {
-    app.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log("User Log In");
-      }
-    });
+  async signInUser(email, password) {
+    return await app
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        return user.user.uid;
+      })
+      .catch(error => {
+        const err = {
+          code: error.code,
+          message: error.message
+        };
+        return err;
+      });
   },
 
   async registerNewUser(email, password, displayName) {
@@ -40,28 +48,36 @@ const FSServices = {
           .doc(spice.name)
           .set(spice);
       });
+      return await this.fetchUserData(user.user.uid);
     } catch (error) {
       console.log(error);
       return error;
     }
-    // return app
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((user) => {
-    //     let user = app.auth().currentUser
-
-    //   })
-    //   .catch(error => {
-    //     return error;
-    //   });
   },
 
-  async fetchSpices(userId = "1R8B2HYUWhD1iJ9Obzc6") {
+  async fetchSpices(userId) {
     return db
       .collection("users")
       .doc(userId)
       .collection("spices")
       .get();
+  },
+
+  async fetchUserData(userId) {
+    let userRef = db.collection("users").doc(userId);
+    let getDoc = userRef
+      .get()
+      .then(doc => {
+        if (!doc.exists) {
+          console.log("User Does Not Exist");
+        } else {
+          return doc.data();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    return getDoc;
   }
 };
 

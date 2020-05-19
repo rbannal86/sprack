@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FSServices from "../../Services/FSServices";
 
-const UserRegister = () => {
+const UserRegister = props => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,14 +12,16 @@ const UserRegister = () => {
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
 
-  const submitRegistration = e => {
+  const submitRegistration = async e => {
     e.preventDefault();
     if (!passRegex.test(password))
       return setError(
         "Password must be eight characters or longer and contain at least 1 lowercase, 1 uppercase, 1 numeric, and one special character. We take your spice rack security very seriously!"
       );
     if (password !== confirmPassword) return setError("Passwords Do Not Match");
-    FSServices.registerNewUser(email, password, userName);
+    let userId = await FSServices.registerNewUser(email, password, userName);
+    console.log(userId);
+    props.setUserId(userId);
   };
 
   const setInputState = e => {
@@ -44,6 +46,7 @@ const UserRegister = () => {
 
   return (
     <div>
+      <h2>REGISTER</h2>
       <form onSubmit={e => submitRegistration(e)}>
         <label htmlFor="user_email">Email: </label>
         <input

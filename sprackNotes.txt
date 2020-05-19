@@ -1,0 +1,3 @@
+Wire up log-in
+Rewire Dashboard to work with new spice collection
+Set up context for id and displayName
