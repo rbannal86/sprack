@@ -13,6 +13,7 @@ const UserLogin = props => {
     else {
       let userData = await FSServices.fetchUserData(login);
       props.setUserId(userData);
+      props.setDisplay(null);
     }
   };
 

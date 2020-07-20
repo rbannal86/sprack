@@ -22,6 +22,7 @@ const UserRegister = props => {
     let userId = await FSServices.registerNewUser(email, password, userName);
     console.log(userId);
     props.setUserId(userId);
+    props.setDisplay(null);
   };
 
   const setInputState = e => {

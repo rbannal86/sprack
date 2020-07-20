@@ -8,12 +8,21 @@ import { useState } from "react";
 
 function App() {
   const [userId, setUserId] = useState("");
+  const [display, setDisplay] = useState("");
 
   return (
     <div className="App">
-      <Header userName={userId.displayName} />
-      <UserRegister setUserId={setUserId} />
-      <UserLogin setUserId={setUserId} />
+      <Header
+        userName={userId.displayName}
+        setDisplay={setDisplay}
+        setUserId={setUserId}
+      />
+      {display === "register" ? (
+        <UserRegister setUserId={setUserId} setDisplay={setDisplay} />
+      ) : null}
+      {display === "login" ? (
+        <UserLogin setUserId={setUserId} setDisplay={setDisplay} />
+      ) : null}
     </div>
   );
 }

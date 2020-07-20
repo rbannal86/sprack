@@ -16,12 +16,20 @@ const Header = props => {
     setSlogan(headerSlogans[index]);
   }, [props]);
 
+  console.log(props.userName);
+
   return (
     <div className="header_div">
-      {props.userName ? <h1>Welcome, {props.userName}!</h1> : <></>}
       <h2>{slogan}</h2>
-      <button>Register</button>
-      <button>Log In</button>
+      {!props.userName ? (
+        <>
+          <button onClick={() => props.setDisplay("register")}>Register</button>
+          <button onClick={() => props.setDisplay("login")}>Log In</button>
+        </>
+      ) : null}
+      {props.userName ? (
+        <button onClick={() => props.setUserId("")}>Log Out</button>
+      ) : null}
     </div>
   );
 };
