@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import Dashboard from "./Components/Dashboard/Dashboard";
+import STORE from "./Services/STORE";
 import Header from "./Components/Header/Header";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
-import { useState } from "react";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -12,7 +12,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header
+      <Dashboard />
+      {/* <Header
         userName={userId.displayName}
         setDisplay={setDisplay}
         setUserId={setUserId}
@@ -22,7 +23,7 @@ function App() {
       ) : null}
       {display === "login" ? (
         <UserLogin setUserId={setUserId} setDisplay={setDisplay} />
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

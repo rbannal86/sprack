@@ -1,0 +1,10 @@
+.add_spice_box {
+  background-color: lightgray;
+  width: 50px;
+  height: 100px;
+  padding: 0.5px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: auto;
+}

@@ -1,3 +1,5 @@
-Wire up log-in
-Rewire Dashboard to work with new spice collection
-Set up context for id and displayName
+Go Back To TASKS:
+Tooltip for name on hover
+Use onClick to lock changes on spice bar
+Add border to spices with level change
+Last updated: change STORE to be an object of object with level: num, lastModified: new Date()

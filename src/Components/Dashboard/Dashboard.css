@@ -1,0 +1,30 @@
+.spice_main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 60%;
+  margin: auto;
+}
+
+.spice_individual {
+  flex-direction: column;
+  width: 20%;
+  justify-content: space-around;
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-bottom: 5%;
+}
+
+.spice_header {
+  margin-top: 10%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  text-align: left;
+  width: 100%;
+  display: inline-block;
+  margin: auto;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+}

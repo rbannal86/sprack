@@ -1,0 +1,17 @@
+.segment_main {
+  height: 10%;
+  /* background-color: lightgrey; */
+  /* border-bottom: 1px solid black; */
+}
+
+.active {
+  background-color: orange;
+}
+
+.top {
+  background-color: orangered;
+}
+
+/* .segment_main:hover {
+  background-color: orangered;
+} */
