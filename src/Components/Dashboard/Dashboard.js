@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
 import STORE from "../../Services/STORE";
 import Box from "../Box/Box";
 import AddSpiceBox from "../AddSpiceBox/AddSpiceBox";
 import AddSpiceForm from "../AddSpiceForm/AddSpiceForm";
 import Sidebar from "../Sidebar/Sidebar";
+import PopUpNameEdit from "../PopUpNameEdit/PopUpNameEdit";
 import "./Dashboard.css";
 
 export default function Dashboard2() {
@@ -12,6 +14,7 @@ export default function Dashboard2() {
   const [editSpiceName, setEditSpiceName] = useState(false);
   const [store, setStore] = useState(STORE);
   const [storeUpdated, setStoreUpdated] = useState(false);
+  const [nameToEdit, setNameToEdit] = useState(null);
 
   let newSpiceNames = {};
   let newSpiceLevels = {};
@@ -37,15 +40,16 @@ export default function Dashboard2() {
     setAddShowSpice(!showAddSpice);
   };
 
+  const handleEditSpiceSubmit = (name) => {
+    if (name.length === 0) delete STORE[nameToEdit];
+    else delete Object.assign(STORE, { [name]: STORE[nameToEdit] })[nameToEdit];
+    setNameToEdit(null);
+  };
+
   const handleEditSpiceName = () => {
     if (editSpiceName) {
-      let updatedSpices = Object.keys(newSpiceNames);
-      updatedSpices.forEach((spice) => {
-        delete Object.assign(STORE, { [newSpiceNames[spice]]: STORE[spice] })[
-          spice
-        ];
-      });
-      newSpiceNames = {};
+      handleNameUpdate(nameToEdit);
+      setNameToEdit(null);
     }
     setEditSpiceName(!editSpiceName);
   };
@@ -67,15 +71,16 @@ export default function Dashboard2() {
             className={"spice_individual"}
             key={spice + index + store[spice]}
           >
-            {editSpiceName ? (
-              <input
-                className={"spice_header"}
-                defaultValue={spice}
-                onChange={(e) => handleNameUpdate(spice, e.target.value)}
-              />
-            ) : (
-              <div className={"spice_header"}>{spice}</div>
-            )}
+            <div
+              className={"spice_header"}
+              data-tip={spice}
+              onClick={() => {
+                if (editSpiceName) setNameToEdit(spice);
+              }}
+            >
+              {spice}
+            </div>
+
             <Box
               level={10 - store[spice]}
               handleSpiceLevelChange={handleSpiceLevelChange}
@@ -89,6 +94,7 @@ export default function Dashboard2() {
 
   return (
     <div>
+      <ReactTooltip />
       <Sidebar
         handleSaveSpiceChanges={handleSaveSpiceChanges}
         handleFilterLowSpices={handleFilterLowSpices}
@@ -96,6 +102,12 @@ export default function Dashboard2() {
         filterLowSpices={filterLowSpices}
         editSpiceName={editSpiceName}
       />
+      {nameToEdit ? (
+        <PopUpNameEdit
+          spiceName={nameToEdit}
+          handleEditSpiceSubmit={handleEditSpiceSubmit}
+        />
+      ) : null}
       {showAddSpice ? (
         <AddSpiceForm handleOpenAddSpice={handleOpenAddSpice} />
       ) : null}
