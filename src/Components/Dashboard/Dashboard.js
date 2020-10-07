@@ -103,7 +103,8 @@ export default function Dashboard2(props) {
 
   const renderSpices = () => {
     if (storeUpdated) setStoreUpdated(false);
-    let sortedKeys = Object.keys(store).sort();
+    let sortedKeys = [];
+    if (store) sortedKeys = Object.keys(store).sort();
 
     return sortedKeys.map((spice, index) => {
       if (!filterLowSpices || store[spice] <= 2)

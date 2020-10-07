@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FSServices from "../../Services/FSServices";
 
-const UserRegister = props => {
+const UserRegister = (props) => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ const UserRegister = props => {
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
 
-  const submitRegistration = async e => {
+  const submitRegistration = async (e) => {
     e.preventDefault();
     if (!passRegex.test(password))
       return setError(
@@ -21,11 +21,11 @@ const UserRegister = props => {
     if (password !== confirmPassword) return setError("Passwords Do Not Match");
     let userId = await FSServices.registerNewUser(email, password, userName);
     console.log(userId);
-    props.setUserId(userId);
+    props.setUserData(userId);
     props.setDisplay(null);
   };
 
-  const setInputState = e => {
+  const setInputState = (e) => {
     if (error) setError("");
     switch (e.target.id) {
       case "user_email":
@@ -48,7 +48,7 @@ const UserRegister = props => {
   return (
     <div>
       <h2>REGISTER</h2>
-      <form onSubmit={e => submitRegistration(e)}>
+      <form onSubmit={(e) => submitRegistration(e)}>
         <label htmlFor="user_email">Email: </label>
         <input
           id="user_email"
@@ -56,7 +56,7 @@ const UserRegister = props => {
           placeholder="youremail@email.com"
           name="user_email"
           value={email}
-          onChange={e => setInputState(e)}
+          onChange={(e) => setInputState(e)}
         ></input>
         <label htmlFor="user_name">Username: </label>
         <input
@@ -64,7 +64,7 @@ const UserRegister = props => {
           type="text"
           placeholder="Bill Q. Spiceman"
           value={userName}
-          onChange={e => setInputState(e)}
+          onChange={(e) => setInputState(e)}
         />
         <label htmlFor="user_password">Password: </label>
         <input
@@ -72,7 +72,7 @@ const UserRegister = props => {
           type="password"
           placeholder="password..."
           name="user_password"
-          onChange={e => setInputState(e)}
+          onChange={(e) => setInputState(e)}
         ></input>
         <label htmlFor="user_password_confirm">Confirm Password: </label>
         <input
@@ -80,7 +80,7 @@ const UserRegister = props => {
           type="password"
           placeholder="password..."
           name="user_password_confirm"
-          onChange={e => setInputState(e)}
+          onChange={(e) => setInputState(e)}
         />
         <button>Register</button>
       </form>

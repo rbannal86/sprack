@@ -1,14 +1,13 @@
 import app from "./Base";
 const db = app.firestore();
 
-const defaultSpices = [
-  { name: "salt", amount: 0 },
-  { name: "pepper", amount: 0 },
-  { name: "parsley", amount: 0 },
-  { name: "sage", amount: 0 },
-  { name: "rosemary", amount: 0 },
-  { name: "thyme", amount: 0 },
-];
+const defaultSpices = {
+  Salt: 1,
+  Pepper: 1,
+  Paprika: 1,
+  "Garlic Powder": 1,
+  "Chili Pepper": 1,
+};
 
 const FSServices = {
   async signInUser(email, password) {
@@ -35,16 +34,10 @@ const FSServices = {
       let userObj = {
         id: user.user.uid,
         displayName,
+        favorites: [],
+        store: defaultSpices,
       };
       await db.collection("users").doc(userObj.id).set(userObj);
-      defaultSpices.map(async (spice) => {
-        return await db
-          .collection("users")
-          .doc(userObj.id)
-          .collection("spices")
-          .doc(spice.name)
-          .set(spice);
-      });
       return await this.fetchUserData(user.user.uid);
     } catch (error) {
       console.log(error);
@@ -53,7 +46,7 @@ const FSServices = {
   },
 
   //default parameter for testing
-  async fetchUserData(userId = "1Kja06mE6UYJPcZLwZH9RGKGm4j1") {
+  async fetchUserData(userId) {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
       .get()

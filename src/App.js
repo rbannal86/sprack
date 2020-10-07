@@ -7,21 +7,27 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import FSServices from "./Services/FSServices";
 
 function App() {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState(null);
   const [display, setDisplay] = useState("");
 
   useEffect(() => {
-    async function getData() {
-      await FSServices.fetchUserData().then((data) => {
-        setUserData(data);
-      });
+    if (userData) {
+      async function getData() {
+        await FSServices.fetchUserData(userData.id).then((data) => {
+          setUserData(data);
+        });
+      }
+      getData();
     }
-    getData();
-  }, []);
+  }, [userData]);
 
   return (
     <div className="App">
-      <Header setDisplay={setDisplay} setUserId={setUserData} />
+      <Header
+        userData={userData}
+        setUserData={setUserData}
+        setDisplay={setDisplay}
+      />
       {userData ? (
         <Dashboard
           store={userData.store}
@@ -30,13 +36,12 @@ function App() {
         />
       ) : null}
 
-      {/* 
       {display === "register" ? (
-        <UserRegister setUserId={setUserId} setDisplay={setDisplay} />
+        <UserRegister setUserData={setUserData} setDisplay={setDisplay} />
       ) : null}
       {display === "login" ? (
-        <UserLogin setUserId={setUserId} setDisplay={setDisplay} />
-      ) : null} */}
+        <UserLogin setUserData={setUserData} setDisplay={setDisplay} />
+      ) : null}
     </div>
   );
 }
