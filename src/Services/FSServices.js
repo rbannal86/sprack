@@ -3,10 +3,10 @@ const db = app.firestore();
 
 const defaultSpices = {
   Salt: 1,
-  Pepper: 1,
-  Paprika: 1,
-  "Garlic Powder": 1,
-  "Chili Pepper": 1,
+  Pepper: 2,
+  Paprika: 3,
+  "Garlic Powder": 4,
+  "Chili Powder": 5,
 };
 
 const FSServices = {

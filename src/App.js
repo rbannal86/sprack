@@ -9,23 +9,32 @@ import FSServices from "./Services/FSServices";
 function App() {
   const [userData, setUserData] = useState(null);
   const [display, setDisplay] = useState("");
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogOut = () => {
+    setLoggingOut(true);
+    setUserData(null);
+  };
 
   useEffect(() => {
-    if (userData) {
-      async function getData() {
-        await FSServices.fetchUserData(userData.id).then((data) => {
-          setUserData(data);
-        });
-      }
+    async function getData() {
+      await FSServices.fetchUserData(userData.id).then((data) => {
+        setUserData(data);
+      });
+    }
+    if (userData && loggingOut) {
       getData();
     }
-  }, [userData]);
+    if (!userData && loggingOut) {
+      setLoggingOut(false);
+    }
+  }, [userData, loggingOut]);
 
   return (
     <div className="App">
       <Header
         userData={userData}
-        setUserData={setUserData}
+        setUserData={handleLogOut}
         setDisplay={setDisplay}
       />
       {userData ? (
