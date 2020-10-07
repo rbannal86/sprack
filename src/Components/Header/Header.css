@@ -1,0 +1,11 @@
+.header_div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

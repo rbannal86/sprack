@@ -25,6 +25,7 @@ export default function Sidebar(props) {
           Show Only Low Spices
         </button>
       )}
+      <button onClick={() => props.handleFilterFavorites()}>Favorites</button>
     </div>
   );
 }

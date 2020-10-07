@@ -8,7 +8,7 @@ export default function AddSpiceForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    STORE[spiceName] = level;
+    props.handleAddSpice(spiceName, level);
     props.handleOpenAddSpice();
   };
 

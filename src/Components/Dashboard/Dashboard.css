@@ -10,7 +10,6 @@
 .spice_individual {
   display: flex;
   flex-direction: row-reverse;
-  width: 65px;
   height: 100px;
   justify-content: space-around;
   margin-right: 3%;
@@ -32,4 +31,9 @@
   margin-bottom: 0;
   font-size: 0.8rem;
   font-weight: bold;
+}
+
+.spice_header_favorite {
+  width: 15px;
+  height: 15px;
 }

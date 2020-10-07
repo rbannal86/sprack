@@ -7,7 +7,7 @@ const defaultSpices = [
   { name: "parsley", amount: 0 },
   { name: "sage", amount: 0 },
   { name: "rosemary", amount: 0 },
-  { name: "thyme", amount: 0 }
+  { name: "thyme", amount: 0 },
 ];
 
 const FSServices = {
@@ -15,13 +15,13 @@ const FSServices = {
     return await app
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(user => {
+      .then((user) => {
         return user.user.uid;
       })
-      .catch(error => {
+      .catch((error) => {
         const err = {
           code: error.code,
-          message: error.message
+          message: error.message,
         };
         return err;
       });
@@ -34,13 +34,10 @@ const FSServices = {
         .createUserWithEmailAndPassword(email, password);
       let userObj = {
         id: user.user.uid,
-        displayName
+        displayName,
       };
-      await db
-        .collection("users")
-        .doc(userObj.id)
-        .set(userObj);
-      defaultSpices.map(async spice => {
+      await db.collection("users").doc(userObj.id).set(userObj);
+      defaultSpices.map(async (spice) => {
         return await db
           .collection("users")
           .doc(userObj.id)
@@ -55,30 +52,35 @@ const FSServices = {
     }
   },
 
-  async fetchSpices(userId) {
-    return db
-      .collection("users")
-      .doc(userId)
-      .collection("spices")
-      .get();
-  },
-
-  async fetchUserData(userId) {
+  //default parameter for testing
+  async fetchUserData(userId = "1Kja06mE6UYJPcZLwZH9RGKGm4j1") {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (!doc.exists) {
           console.log("User Does Not Exist");
         } else {
           return doc.data();
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     return getDoc;
-  }
+  },
+
+  async updateStore(store, userId) {
+    let userRef = db.collection("users").doc(userId);
+    userRef.update({ store: store });
+  },
+
+  async updateFavorites(favorites, userId) {
+    console.log(favorites);
+    let userRef = db.collection("users").doc(userId);
+    if (favorites.length === 0) userRef.update({ favorites: [] });
+    else userRef.update({ favorites: favorites });
+  },
 };
 
 export default FSServices;
