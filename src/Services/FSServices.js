@@ -27,6 +27,7 @@ const FSServices = {
   },
 
   async registerNewUser(email, password, displayName) {
+    console.log("registering new user");
     try {
       let user = await app
         .auth()

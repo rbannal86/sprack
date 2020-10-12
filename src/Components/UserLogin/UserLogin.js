@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FSServices from "../../Services/FSServices";
+import "./UserLogin.css";
 
 const UserLogin = (props) => {
   const [email, setEmail] = useState("");
@@ -32,11 +33,14 @@ const UserLogin = (props) => {
   };
 
   return (
-    <div>
-      <h2>LOGIN</h2>
-      <form onSubmit={(e) => submitLogin(e)}>
-        <label htmlFor="user_email_login">Account Email: </label>
+    <div className={"login_main"}>
+      <h2 className={"login_title"}>LOGIN</h2>
+      <form onSubmit={(e) => submitLogin(e)} className={"login_form"}>
+        <label htmlFor="user_email_login">
+          <h3 className={"login_label"}>Account Email: </h3>
+        </label>
         <input
+          className="login_input"
           id="user_email_login"
           type="email"
           placeholder="youremail@email.com"
@@ -44,15 +48,18 @@ const UserLogin = (props) => {
           value={email}
           onChange={(e) => setInputState(e)}
         />
-        <label htmlFor="user_password_login">Password: </label>
+        <label htmlFor="user_password_login">
+          <h3 className={"login_label"}>Password: </h3>
+        </label>
         <input
+          className="login_input"
           id="user_password_login"
           type="password"
           placeholder="password..."
           name="user_password_login"
           onChange={(e) => setInputState(e)}
         />
-        <button>Log In</button>
+        <button className={"login_button"}>Log In</button>
       </form>
       <div className="login_error">{error}</div>
     </div>

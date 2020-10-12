@@ -1,5 +1,11 @@
 Go Back To TASKS:
-Tooltip for name on hover
-Use onClick to lock changes on spice bar
-Add border to spices with level change
-Last updated: change STORE to be an object of object with level: num, lastModified: new Date()
+Exit Add Spice w/o adding spice
+
+colors:
+F26419
+F6AE2D
+607196
+581F18
+
+font-family: 'Anton', sans-serif;
+font-family: 'Lato', sans-serif;

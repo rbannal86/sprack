@@ -8,4 +8,44 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-top: 1%;
+}
+
+.header_button {
+  border: 2px solid black;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  font-size: 0.6rem;
+  margin-bottom: 10%;
+  background-color: #f6ae2d;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.header_title {
+  font-size: 4rem;
+  margin-left: 2%;
+  margin-top: 0;
+  color: #f6ae2d;
+  text-shadow: 2px 2px black;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  height: 80px;
+}
+
+.header_subtitle {
+  font-size: 0.8rem;
+  margin-left: 3%;
+  color: #f6ae2d;
+  text-shadow: 2px 2px black;
+  margin-top: 0;
+}
+
+.header_title_div {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin-top: 0;
+  text-align: right;
 }
