@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Form from "../../Forms/Form";
 import FSServices from "../../Services/FSServices";
 import "./UserRegister.css";
 
@@ -27,9 +28,14 @@ const UserRegister = (props) => {
       return setError("Passwords Do Not Match");
     }
     let userId = await FSServices.registerNewUser(email, password, userName);
-    console.log(userId);
-    props.setUserData(userId);
-    props.setDisplay(null);
+    if (userId.code === "auth/email-already-in-use") {
+      setError("Email already in use!");
+      document.getElementById("register_submit_button").disabled = false;
+    } else {
+      console.log(userId);
+      props.setUserData(userId);
+      props.setDisplay(null);
+    }
   };
 
   const setInputState = (e) => {
@@ -42,6 +48,7 @@ const UserRegister = (props) => {
         setPassword(e.target.value);
         break;
       case "user_password_comfirm":
+        console.log("confirm");
         setConfirmPassword(e.target.value);
         break;
       case "user_name":
@@ -53,65 +60,50 @@ const UserRegister = (props) => {
   };
 
   return (
-    <div className={"register_main"}>
-      <h2 className={"register_title"}>REGISTER</h2>
-      <form onSubmit={(e) => submitRegistration(e)} className={"register_form"}>
-        <label htmlFor="user_email">
-          <h3 className={"register_label"}>Email: </h3>
-        </label>
-        <input
-          className={"register_input"}
-          id="user_email"
-          type="email"
-          placeholder="youremail@email.com"
-          name="user_email"
-          value={email}
-          onChange={(e) => setInputState(e)}
-        ></input>
-        <label htmlFor="user_name">
-          <h3 className={"register_label"}>Username: </h3>
-        </label>
-        <input
-          className={"register_input"}
-          id="user_name"
-          type="text"
-          placeholder="Bill Q. Spiceman"
-          value={userName}
-          onChange={(e) => setInputState(e)}
-        />
-        <label htmlFor="user_password">
-          <h3 className={"register_label"}>Password: </h3>
-        </label>
-        <input
-          className={"register_input"}
-          id="user_password"
-          type="password"
-          placeholder="password..."
-          name="user_password"
-          onChange={(e) => setInputState(e)}
-        ></input>
-        <label htmlFor="user_password_confirm">
-          <h3 className={"register_label"}>Confirm Password: </h3>
-        </label>
-        <input
-          className={"register_input"}
-          id="user_password_comfirm"
-          type="password"
-          placeholder="password..."
-          name="user_password_confirm"
-          onChange={(e) => setInputState(e)}
-        />
-
-        <button
-          type={"submit"}
-          id={"register_submit_button"}
-          className={"register_button"}
-        >
-          Register
-        </button>
-      </form>
-      {error ? <div className={"register_error"}>{error}</div> : null}
-    </div>
+    <Form
+      submit={submitRegistration}
+      buttonLabel={"Register"}
+      buttonId={"register_submit_button"}
+      error={error}
+      fields={[
+        {
+          label: "Email: ",
+          id: "user_email",
+          placeholder: "youremail@email.com",
+          type: "email",
+          onChange: setInputState,
+          name: "user_email",
+          value: email,
+        },
+        {
+          label: "Username: ",
+          id: "user_name",
+          placeholder: "Bill Q. Spiceman",
+          type: "text",
+          onChange: setInputState,
+          name: "user_name",
+          value: userName,
+        },
+        {
+          label: "Password: ",
+          id: "user_password",
+          placeholder: "password...",
+          type: "password",
+          onChange: setInputState,
+          name: "user_password",
+          value: password,
+        },
+        {
+          label: "Confirm Password: ",
+          id: "user_password_comfirm",
+          placeholder: "password...",
+          type: "password",
+          onChange: setInputState,
+          name: "user_password_confirm",
+          value: confirmPassword,
+        },
+      ]}
+    />
   );
 };
 

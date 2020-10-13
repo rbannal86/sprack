@@ -1,27 +1,32 @@
-.login_main {
+.form_main {
   display: flex;
   flex-direction: column;
   width: 60%;
   margin: auto;
-}
-
-.login_form {
-  display: flex;
-  flex-direction: column;
   text-align: left;
 }
 
-.login_input {
-  margin-bottom: 5%;
-  height: 30px;
-  width: 80%;
+.form_error {
+  font-weight: bolder;
+  color: red;
+  text-shadow: 1px 1px black;
 }
 
-.login_label {
+.form_input {
+  margin-bottom: 5%;
+  height: 30px;
+  width: 97%;
+}
+
+.form_label {
   margin: auto;
 }
 
-.login_button {
+.form_title {
+  margin-bottom: 0;
+}
+
+.form_button {
   border: 2px solid black;
   height: 80px;
   width: 80px;
@@ -32,11 +37,4 @@
   font-weight: bolder;
   text-align: center;
   align-self: center;
-}
-
-.login_error {
-  font-weight: bolder;
-  color: red;
-  text-shadow: 1px 1px black;
-  margin-top: 5%;
 }
