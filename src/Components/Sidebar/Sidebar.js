@@ -1,24 +1,44 @@
 import React, { useState } from "react";
 import FilterOptions from "../FilterOptions/FilterOptions";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import EditIcon from "@material-ui/icons/Edit";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import "./Sidebar.css";
 
 export default function Sidebar(props) {
   const [filter, setFilter] = useState(false);
   return (
     <div className={"sidebar"}>
-      <button onClick={() => props.handleSaveSpiceChanges()}>
-        Submit Changes
+      <button
+        className={"sidebar_button"}
+        onClick={() => props.handleSaveSpiceChanges()}
+        aria-label={"Save Level Changes"}
+        aria-hidden={"false"}
+      >
+        <SaveAltIcon aria-label={"Save Level Changes"} aria-hidden={"false"} />
       </button>
       {props.editSpiceName ? (
-        <button onClick={() => props.handleEditSpiceName()}>
-          Save Changes to Spice Names
+        <button
+          className={"sidebar_button"}
+          onClick={() => props.handleEditSpiceName()}
+        >
+          <EditIcon
+            color={"secondary"}
+            aria-label={"Toggle Edit Mode"}
+            aria-hidden={"false"}
+          />
         </button>
       ) : (
-        <button onClick={() => props.handleEditSpiceName()}>
-          Edit Spice Names
+        <button
+          className={"sidebar_button"}
+          onClick={() => props.handleEditSpiceName()}
+        >
+          <EditIcon aria-label={"Toggle Edit Mode"} aria-hidden={"false"} />
         </button>
       )}
-      <button onClick={() => setFilter(!filter)}>Filter</button>
+      <button className={"sidebar_button"} onClick={() => setFilter(!filter)}>
+        <FilterListIcon aria-label={"Filter Options"} aria-hidden={"false"} />
+      </button>
       {filter ? (
         <FilterOptions
           lowSpice={props.handleFilterLowSpices}

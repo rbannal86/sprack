@@ -1,5 +1,7 @@
 .segment_main {
   height: 10%;
+  width: 51px;
+  align-self: center;
   /* background-color: lightgrey; */
   /* border-bottom: 1px solid black; */
 }

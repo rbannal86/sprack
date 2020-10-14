@@ -4,3 +4,16 @@
   width: 15%;
   position: absolute;
 }
+
+.sidebar_button {
+  border: 1px solid black;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-size: 1rem;
+  margin-bottom: 5%;
+  background-color: #f6ae2d;
+  font-weight: bolder;
+  text-align: center;
+  align-self: center;
+}

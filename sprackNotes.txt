@@ -1,5 +1,6 @@
 Go Back To TASKS:
 Exit Add Spice w/o adding spice
+Lighten background color to increase contrast
 
 colors:
 F26419

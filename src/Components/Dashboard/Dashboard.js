@@ -6,6 +6,8 @@ import AddSpiceForm from "../AddSpiceForm/AddSpiceForm";
 import Sidebar from "../Sidebar/Sidebar";
 import PopUpNameEdit from "../PopUpNameEdit/PopUpNameEdit";
 import FSServices from "../../Services/FSServices";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import "./Dashboard.css";
 
 export default function Dashboard2(props) {
@@ -15,6 +17,7 @@ export default function Dashboard2(props) {
   const [editSpiceName, setEditSpiceName] = useState(false);
   const [store, setStore] = useState(props.store);
   const [storeUpdated, setStoreUpdated] = useState(false);
+  const [favoritesUpdated, setFavoritesUpdated] = useState(false);
   const [nameToEdit, setNameToEdit] = useState(null);
   const [favorites, setFavorites] = useState(props.favorites);
 
@@ -41,6 +44,7 @@ export default function Dashboard2(props) {
       newFavorites.push(spice);
       setFavorites(newFavorites);
     }
+    setFavoritesUpdated(true);
     FSServices.updateFavorites(newFavorites, props.userId);
   };
 
@@ -103,6 +107,7 @@ export default function Dashboard2(props) {
 
   const renderSpices = () => {
     if (storeUpdated) setStoreUpdated(false);
+    if (favoritesUpdated) setFavoritesUpdated(false);
     let sortedKeys = [];
     if (store) sortedKeys = Object.keys(store).sort();
 
@@ -119,7 +124,21 @@ export default function Dashboard2(props) {
                   className={"spice_header_favorite"}
                   onClick={() => handleFavorites(spice)}
                 >
-                  F
+                  {favorites.includes(spice) ? (
+                    <FavoriteIcon
+                      fontSize="small"
+                      color="secondary"
+                      aria-label={"Favorite Spice"}
+                      aria-hidden={"false"}
+                    />
+                  ) : (
+                    <FavoriteBorderIcon
+                      fontSize="small"
+                      color="secondary"
+                      aria-label={"Add to Favorites"}
+                      aria-hidden={"false"}
+                    />
+                  )}
                 </button>
                 <div
                   className={"spice_header"}
@@ -155,6 +174,9 @@ export default function Dashboard2(props) {
         filterLowSpices={filterLowSpices}
         editSpiceName={editSpiceName}
       />
+      {editSpiceName && !nameToEdit ? (
+        <h5>Click on a spice name to edit</h5>
+      ) : null}
       {nameToEdit ? (
         <PopUpNameEdit
           spiceName={nameToEdit}
