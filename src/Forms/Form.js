@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Form.css";
 
 export default function Form(props) {
+  useEffect(() => {
+    let element = document.getElementById("form_top");
+    element.scrollIntoView({ behavior: "smooth" });
+  });
+
   const renderInput = () => {
     return props.fields.map((field, index) => {
       return (
@@ -24,12 +29,17 @@ export default function Form(props) {
   };
 
   return (
-    <form className={"form_main"} onSubmit={(e) => props.submit(e)}>
+    <form
+      className={"form_main"}
+      id={"form_top"}
+      onSubmit={(e) => props.submit(e)}
+    >
       <div className="form_error">{props.error}</div>
       {renderInput()}
       <button className={"form_button"} id={props.buttonId}>
         {props.buttonLabel}
       </button>
+      <div id={"form_bottom"} />
     </form>
   );
 }
