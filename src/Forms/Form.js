@@ -5,7 +5,7 @@ export default function Form(props) {
   useEffect(() => {
     let element = document.getElementById("form_top");
     element.scrollIntoView({ behavior: "smooth" });
-  });
+  }, []);
 
   const renderInput = () => {
     return props.fields.map((field, index) => {

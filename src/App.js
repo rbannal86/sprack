@@ -42,6 +42,7 @@ function App() {
           store={userData.store}
           userId={userData.id}
           favorites={userData.favorites}
+          displayName={userData.displayName}
         />
       ) : null}
 

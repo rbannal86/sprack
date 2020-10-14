@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Box from "../Box/Box";
+import ClearIcon from "@material-ui/icons/Clear";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import "./AddSpiceForm.css";
 
 export default function AddSpiceForm(props) {
@@ -8,8 +10,12 @@ export default function AddSpiceForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.handleAddSpice(spiceName, level);
-    props.handleOpenAddSpice();
+    if (Object.keys(props.store).includes(spiceName))
+      props.setError("This spice has already been registered!");
+    else {
+      props.handleAddSpice(spiceName, level);
+      props.handleOpenAddSpice();
+    }
   };
 
   return (
@@ -22,14 +28,24 @@ export default function AddSpiceForm(props) {
       <input
         onChange={(e) => {
           setSpiceName(e.target.value);
+          props.setError(null);
         }}
         placeholder={"Enter Spice Name"}
         type={"text"}
         required
       />
       <Box level={10} setLevel={setLevel} />
-      <button type={"submit"}>Submit</button>
-      <button onClick={() => props.handleOpenAddSpice()}>Cancel</button>
+      <div className={"add_spice_form_button_div"}>
+        <button className={"add_spice_form_button"} type={"submit"}>
+          <SaveAltIcon />
+        </button>
+        <button
+          className={"add_spice_form_button"}
+          onClick={() => props.handleOpenAddSpice()}
+        >
+          <ClearIcon />
+        </button>
+      </div>
     </form>
   );
 }

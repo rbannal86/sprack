@@ -13,7 +13,7 @@ const Header = (props) => {
 
       {props.userData ? (
         <button
-          className={"header_button"}
+          className={"header_button logout_button"}
           onClick={() => props.setUserData(null)}
         >
           Log Out

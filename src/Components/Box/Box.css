@@ -7,6 +7,7 @@
   flex-direction: column;
   margin: auto;
   border: 2px solid #607196;
+  touch-action: none;
 }
 
 .changed {

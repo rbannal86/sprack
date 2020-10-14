@@ -1,7 +1,43 @@
-.popup_form {
+/* .popup_form {
   width: 60%;
-  display: flex;
-  flex-direction: column;
+} */
+
+.name_edit_form {
+  width: 60%;
   justify-content: space-around;
   margin: auto;
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.name_edit_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: inherit;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.name_edit_label {
+  margin-bottom: 5%;
+}
+
+.name_edit_input {
+  height: fit-content;
+  margin-bottom: 5%;
+  text-align: center;
+}
+
+.name_edit_button {
+  border: 1px solid black;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-size: 1rem;
+  margin-bottom: 5%;
+  background-color: #f6ae2d;
+  font-weight: bolder;
+  text-align: center;
+  align-self: center;
 }

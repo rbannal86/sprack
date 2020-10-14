@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
 import FilterOptions from "../FilterOptions/FilterOptions";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import EditIcon from "@material-ui/icons/Edit";
@@ -25,7 +26,9 @@ export default function Sidebar(props) {
 
   return (
     <div className={"sidebar"}>
+      <ReactTooltip event={"float"} />
       <button
+        data-tip={"Save Changes"}
         className={"sidebar_button " + spiceLevelChanged}
         onClick={() => props.handleSaveSpiceChanges()}
         aria-label={"Save Level Changes"}
@@ -34,12 +37,14 @@ export default function Sidebar(props) {
         <SaveAltIcon aria-label={"Save Level Changes"} aria-hidden={"false"} />
       </button>
       <button
+        data-tip={"Edit Spice Names or Delete Spice"}
         className={"sidebar_button " + toggleEditSpice}
         onClick={() => props.handleEditSpiceName()}
       >
         <EditIcon aria-label={"Toggle Edit Mode"} aria-hidden={"false"} />
       </button>
       <button
+        data-tip={"Filter Options"}
         className={"sidebar_button " + filterOpen}
         onClick={() => setFilter(!filter)}
       >

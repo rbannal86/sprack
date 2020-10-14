@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactTooltip from "react-tooltip";
 import Box from "../Box/Box";
 import AddSpiceBox from "../AddSpiceBox/AddSpiceBox";
@@ -21,9 +21,14 @@ export default function Dashboard2(props) {
   const [nameToEdit, setNameToEdit] = useState(null);
   const [favorites, setFavorites] = useState(props.favorites);
   const [spiceLevelChanged, setSpiceLevelChanged] = useState(false);
+  const [error, setError] = useState(null);
 
   let newSpiceNames = {};
   let newSpiceLevels = {};
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   const handleAddSpice = (spice, level) => {
     let updatedStore = store;
@@ -125,7 +130,7 @@ export default function Dashboard2(props) {
     if (store) sortedKeys = Object.keys(store).sort();
 
     return sortedKeys.map((spice, index) => {
-      if (!filterLowSpices || store[spice] <= 2)
+      if (!filterLowSpices || store[spice] <= 3)
         if (!filterFavorites || favorites.includes(spice))
           return (
             <div
@@ -178,8 +183,7 @@ export default function Dashboard2(props) {
   };
 
   return (
-    <div>
-      <ReactTooltip />
+    <>
       <Sidebar
         handleSaveSpiceChanges={handleSaveSpiceChanges}
         handleFilterLowSpices={handleFilterLowSpices}
@@ -189,31 +193,43 @@ export default function Dashboard2(props) {
         editSpiceName={editSpiceName}
         spiceLevelChanged={spiceLevelChanged}
       />
-      {editSpiceName && !nameToEdit ? (
-        <h5>Click on a spice name to edit</h5>
-      ) : null}
-      {nameToEdit ? (
-        <PopUpNameEdit
-          spiceName={nameToEdit}
-          handleEditSpiceSubmit={handleEditSpiceSubmit}
-        />
-      ) : null}
-      {showAddSpice ? (
-        <AddSpiceForm
-          handleOpenAddSpice={handleOpenAddSpice}
-          handleAddSpice={handleAddSpice}
-        />
-      ) : null}
-      <div className={"spice_main"}>
-        {renderSpices()}
-        <div className={"spice_individual"}>
-          <div className={"spice_header"}>Add Spice</div>
-          <AddSpiceBox
-            handleOpenAddSpice={handleOpenAddSpice}
-            filterLowSpices={filterLowSpices}
+      <div className={"dashboard_main"}>
+        <ReactTooltip />
+        <h3 className={"dashboard_username"}>
+          {props.displayName}'s Spice Rack
+        </h3>
+
+        {error ? <div className={"dashboard_error"}>{error}</div> : null}
+        {editSpiceName && !nameToEdit ? (
+          <h5 className={"dashboard_edit_header"}>
+            Click on a spice name to edit that name or delete that spice
+          </h5>
+        ) : null}
+        {nameToEdit ? (
+          <PopUpNameEdit
+            spiceName={nameToEdit}
+            handleEditSpiceSubmit={handleEditSpiceSubmit}
           />
+        ) : null}
+        {showAddSpice ? (
+          <AddSpiceForm
+            handleOpenAddSpice={handleOpenAddSpice}
+            handleAddSpice={handleAddSpice}
+            setError={setError}
+            store={store}
+          />
+        ) : null}
+        <div className={"spice_main"}>
+          {renderSpices()}
+          <div className={"spice_individual"}>
+            <div className={"spice_header"}>Add Spice</div>
+            <AddSpiceBox
+              handleOpenAddSpice={handleOpenAddSpice}
+              filterLowSpices={filterLowSpices}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
