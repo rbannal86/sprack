@@ -7,36 +7,42 @@ import "./Sidebar.css";
 
 export default function Sidebar(props) {
   const [filter, setFilter] = useState(false);
+  const [spiceLevelChanged, setSpiceLevelChanged] = useState("");
+  const [toggleEditSpice, setToggleEditSpice] = useState("");
+  const [filterOpen, setFilterOpen] = useState("");
+
+  if (props.editSpiceName && toggleEditSpice === "") setToggleEditSpice("yes");
+  else if (!props.editSpiceName && toggleEditSpice === "yes")
+    setToggleEditSpice("");
+
+  if (props.spiceLevelChanged && spiceLevelChanged === "")
+    setSpiceLevelChanged("yes");
+  else if (!props.spiceLevelChanged && spiceLevelChanged === "yes")
+    setSpiceLevelChanged("");
+
+  if (filter && filterOpen === "") setFilterOpen("yes");
+  else if (!filter && filterOpen === "yes") setFilterOpen("");
+
   return (
     <div className={"sidebar"}>
       <button
-        className={"sidebar_button"}
+        className={"sidebar_button " + spiceLevelChanged}
         onClick={() => props.handleSaveSpiceChanges()}
         aria-label={"Save Level Changes"}
         aria-hidden={"false"}
       >
         <SaveAltIcon aria-label={"Save Level Changes"} aria-hidden={"false"} />
       </button>
-      {props.editSpiceName ? (
-        <button
-          className={"sidebar_button"}
-          onClick={() => props.handleEditSpiceName()}
-        >
-          <EditIcon
-            color={"secondary"}
-            aria-label={"Toggle Edit Mode"}
-            aria-hidden={"false"}
-          />
-        </button>
-      ) : (
-        <button
-          className={"sidebar_button"}
-          onClick={() => props.handleEditSpiceName()}
-        >
-          <EditIcon aria-label={"Toggle Edit Mode"} aria-hidden={"false"} />
-        </button>
-      )}
-      <button className={"sidebar_button"} onClick={() => setFilter(!filter)}>
+      <button
+        className={"sidebar_button " + toggleEditSpice}
+        onClick={() => props.handleEditSpiceName()}
+      >
+        <EditIcon aria-label={"Toggle Edit Mode"} aria-hidden={"false"} />
+      </button>
+      <button
+        className={"sidebar_button " + filterOpen}
+        onClick={() => setFilter(!filter)}
+      >
         <FilterListIcon aria-label={"Filter Options"} aria-hidden={"false"} />
       </button>
       {filter ? (

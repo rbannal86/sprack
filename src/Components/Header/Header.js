@@ -12,7 +12,12 @@ const Header = (props) => {
       </div>
 
       {props.userData ? (
-        <button onClick={() => props.setUserData(null)}>Log Out</button>
+        <button
+          className={"header_button"}
+          onClick={() => props.setUserData(null)}
+        >
+          Log Out
+        </button>
       ) : (
         <div className={"header_buttons"}>
           <button

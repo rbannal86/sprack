@@ -13,3 +13,7 @@ h5 {
   color: #f6ae2d;
   text-shadow: 2px 2px black;
 }
+
+button {
+  outline: none;
+}

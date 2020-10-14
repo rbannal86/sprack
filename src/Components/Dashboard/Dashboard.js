@@ -20,6 +20,7 @@ export default function Dashboard2(props) {
   const [favoritesUpdated, setFavoritesUpdated] = useState(false);
   const [nameToEdit, setNameToEdit] = useState(null);
   const [favorites, setFavorites] = useState(props.favorites);
+  const [spiceLevelChanged, setSpiceLevelChanged] = useState(false);
 
   let newSpiceNames = {};
   let newSpiceLevels = {};
@@ -31,8 +32,18 @@ export default function Dashboard2(props) {
     FSServices.updateStore(store, props.userId);
   };
 
+  const handleNoChanges = (spice) => {
+    if (Object.keys(newSpiceLevels).includes(spice)) {
+      delete newSpiceLevels[spice];
+    }
+    if (Object.keys(newSpiceLevels).length === 0 && spiceLevelChanged)
+      setSpiceLevelChanged(false);
+  };
+
   const handleSpiceLevelChange = (spice, level) => {
+    setSpiceLevelChanged(true);
     newSpiceLevels[spice] = 11 - level;
+    console.log(newSpiceLevels);
   };
 
   const handleFavorites = (spice) => {
@@ -50,6 +61,7 @@ export default function Dashboard2(props) {
 
   const handleSaveSpiceChanges = () => {
     let updatedStore = store;
+    setSpiceLevelChanged(false);
 
     Object.keys(newSpiceLevels).forEach((spice) => {
       Object.assign(updatedStore, { [spice]: newSpiceLevels[spice] });
@@ -73,6 +85,7 @@ export default function Dashboard2(props) {
   };
 
   const handleEditSpiceSubmit = (name) => {
+    setSpiceLevelChanged(false);
     if (favorites.includes(nameToEdit)) {
       let updatedFavorites = favorites.filter((spice) => spice !== nameToEdit);
       if (name.length !== 0) updatedFavorites.push(name);
@@ -155,6 +168,7 @@ export default function Dashboard2(props) {
                 level={10 - store[spice]}
                 handleSpiceLevelChange={handleSpiceLevelChange}
                 spiceName={spice}
+                handleNoChanges={handleNoChanges}
               />
             </div>
           );
@@ -173,6 +187,7 @@ export default function Dashboard2(props) {
         handleFilterFavorites={handleFilterFavorites}
         filterLowSpices={filterLowSpices}
         editSpiceName={editSpiceName}
+        spiceLevelChanged={spiceLevelChanged}
       />
       {editSpiceName && !nameToEdit ? (
         <h5>Click on a spice name to edit</h5>

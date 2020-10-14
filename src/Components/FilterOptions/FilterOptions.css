@@ -1,0 +1,19 @@
+.filter_option_list {
+  text-align: center;
+  list-style: none;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.filter_option {
+  font-weight: bold;
+  font-size: 0.7rem;
+  height: 10%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.checked {
+  color: red;
+  text-shadow: 1px 1px black;
+}

@@ -7,7 +7,7 @@ export default function Segment(props) {
       className={"segment_main " + props.status}
       id={props.stack}
       onClick={() => {
-        props.setUnlocked(true);
+        props.setUnlocked(!props.unlocked);
         props.setSelected(props.stack);
       }}
       onMouseEnter={() => {

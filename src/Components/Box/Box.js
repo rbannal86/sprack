@@ -17,6 +17,7 @@ export default function Box(props) {
   }
 
   if (originalSelected === selected && changedStatus === "changed") {
+    props.handleNoChanges(props.spiceName);
     setChangedStatus("");
   }
 

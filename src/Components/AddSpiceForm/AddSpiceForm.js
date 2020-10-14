@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Box from "../Box/Box";
-import STORE from "../../Services/STORE";
+import "./AddSpiceForm.css";
 
 export default function AddSpiceForm(props) {
   const [level, setLevel] = useState(0);
@@ -14,6 +14,7 @@ export default function AddSpiceForm(props) {
 
   return (
     <form
+      className={"add_spice_form"}
       onSubmit={(e) => {
         handleSubmit(e);
       }}
@@ -28,6 +29,7 @@ export default function AddSpiceForm(props) {
       />
       <Box level={10} setLevel={setLevel} />
       <button type={"submit"}>Submit</button>
+      <button onClick={() => props.handleOpenAddSpice()}>Cancel</button>
     </form>
   );
 }

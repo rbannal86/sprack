@@ -1,6 +1,6 @@
 Go Back To TASKS:
-Exit Add Spice w/o adding spice
 Lighten background color to increase contrast
+Edit Spice Helper Header Spacing to avoid buttons jumping
 
 colors:
 F26419
