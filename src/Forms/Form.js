@@ -9,7 +9,23 @@ export default function Form(props) {
 
   const renderInput = () => {
     return props.fields.map((field, index) => {
-      return (
+      if(field.type === "textarea") {
+        return         <div key={index}>
+        <label className={"form_label"}>
+          <h3 className={"form_title"}>{field.label}</h3>
+        </label>
+        <textarea
+          className={"form_input"}
+          id={field.id}
+          type={field.type}
+          name={field.name}
+          value={field.value}
+          onChange={(e) => field.onChange(e)}
+          placeholder={field.placeholder}
+        />
+      </div>
+      }
+      else return (
         <div key={index}>
           <label className={"form_label"}>
             <h3 className={"form_title"}>{field.label}</h3>

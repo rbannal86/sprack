@@ -46,7 +46,6 @@ const FSServices = {
     }
   },
 
-  //default parameter for testing
   async fetchUserData(userId) {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
@@ -70,11 +69,16 @@ const FSServices = {
   },
 
   async updateFavorites(favorites, userId) {
-    console.log(favorites);
     let userRef = db.collection("users").doc(userId);
     if (favorites.length === 0) userRef.update({ favorites: [] });
     else userRef.update({ favorites: favorites });
   },
+
+  async submitFeedback(title, body, user) {
+    const data = {title, body, user, new: true}
+    await db.collection('feedback').add(data)
+    console.log('feedback submitted')
+  }
 };
 
 export default FSServices;

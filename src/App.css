@@ -14,3 +14,13 @@ h5 {
   color: #f6ae2d;
   text-shadow: 2px 2px black;
 }
+
+#feedback_button {
+  background-color: #f6ae2d;
+  border: 2px solid black;
+  font-size: 0.7rem;
+  padding: 1%;
+  position: relative;
+  bottom: 5%;
+  margin-top: 3%;
+}
