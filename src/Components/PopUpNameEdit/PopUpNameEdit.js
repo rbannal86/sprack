@@ -27,6 +27,7 @@ export default function PopUpNameEdit(props) {
             className={"name_edit_button"}
             onClick={(e) => {
               e.preventDefault();
+              ReactTooltip.hide()
               if (input.length > 0) props.handleEditSpiceSubmit(input);
             }}
           >
