@@ -57,6 +57,10 @@
   text-align: left;
   padding: 0;
   background-color: #324872;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3px;
 }
 
 .dashboard_error {
