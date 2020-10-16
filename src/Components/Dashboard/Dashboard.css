@@ -66,7 +66,21 @@
 }
 
 @media only screen and (min-width: 750px) {
-  .dashboard_main {
-    padding-left: 0;
+  .dashboard_username {
+    margin-top: 0;
+  }
+
+  @media only screen and (min-width: 1000px) {
+    .dashboard_username {
+      margin-bottom: 0;
+    }
+
+    .dashboard_edit_header {
+      margin-top: 3%;
+    }
+
+    .spice_main {
+      margin-top: 3%;
+    }
   }
 }

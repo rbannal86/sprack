@@ -9,6 +9,29 @@ const defaultSpices = {
   "Chili Powder": 5,
 };
 
+const sampleSpices = {
+  Salt: 1,
+  Pepper: 2,
+  Paprika: 3,
+  "Garlic Powder": 4,
+  "Chili Powder": 5,
+  "Garam Masala": 10,
+  "Onion Powder": 3,
+  Cayenne: 3,
+  Chipotle: 4,
+  "White Pepper": 5,
+  "Celery Salt": 7,
+  "Italian Seasoning": 4,
+  Saffron: 2,
+  Turmeric: 5,
+  Cinnamon: 6,
+  "Ground Cloves": 9,
+  "Ground Ginger": 8,
+  Allspice: 4,
+  "Star Anise": 8,
+  "Herbes de Provence": 3,
+};
+
 const FSServices = {
   async signInUser(email, password) {
     return await app
@@ -52,7 +75,7 @@ const FSServices = {
       favorites: ["Salt"],
       id: "v40DelcKHFR6qh9mEyMCxNPYsfM2",
       displayName: "Sample S. Spiceman",
-      store: defaultSpices,
+      store: sampleSpices,
     };
     await db
       .collection("users")

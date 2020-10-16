@@ -58,6 +58,7 @@
 @media only screen and (min-width: 750px) {
   .header_div {
     margin-bottom: 0;
+    height: 150px;
   }
 
   .header_title {
@@ -77,10 +78,13 @@
   }
 
   .header_buttons {
-    margin-top: 4%;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 15%;
+    margin-top: 3%;
   }
 
   .logout_button {
-    margin-top: 5%;
+    margin-top: 3%;
   }
 }

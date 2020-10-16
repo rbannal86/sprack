@@ -30,3 +30,12 @@
   text-align: center;
   align-self: center;
 }
+
+@media only screen and (min-width: 750px) {
+  .add_spice_form_button_div {
+    margin: auto;
+    width: 40%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}

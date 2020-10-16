@@ -22,6 +22,7 @@ export default function AddSpiceForm(props) {
     <form
       className={"add_spice_form"}
       onSubmit={(e) => {
+        e.preventDefault();
         handleSubmit(e);
       }}
     >
@@ -41,7 +42,11 @@ export default function AddSpiceForm(props) {
         </button>
         <button
           className={"add_spice_form_button"}
-          onClick={() => props.handleOpenAddSpice()}
+          onClick={(e) => {
+            e.preventDefault();
+            props.setError(null);
+            props.handleOpenAddSpice();
+          }}
         >
           <ClearIcon />
         </button>

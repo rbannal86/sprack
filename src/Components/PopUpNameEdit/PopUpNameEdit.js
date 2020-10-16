@@ -5,15 +5,15 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import "./PopUpNameEdit.css";
 
 export default function PopUpNameEdit(props) {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(props.spiceName);
 
   return (
     <div className={"popup_form"}>
-      <ReactTooltip />
       <form className={"name_edit_form"}>
         <div className={"name_edit_div"}>
           <h5 className={"name_edit_label"}>Edit Spice Name</h5>
           <input
+            value={input}
             className={"name_edit_input"}
             required
             placeholder={props.spiceName}
@@ -27,7 +27,7 @@ export default function PopUpNameEdit(props) {
             className={"name_edit_button"}
             onClick={(e) => {
               e.preventDefault();
-              ReactTooltip.hide()
+              ReactTooltip.hide();
               if (input.length > 0) props.handleEditSpiceSubmit(input);
             }}
           >
