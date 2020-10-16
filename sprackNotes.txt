@@ -1,5 +1,7 @@
 Go Back To TASKS:
 Edit Spice Helper Header Spacing to avoid buttons jumping
+IMAGES NOT LOADING
+GET STARTED BUTTON NOT RENDERING PROPERLY ON MOBILE
 
 colors:
 F26419

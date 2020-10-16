@@ -21,7 +21,7 @@ export default function Tutorial(props) {
       </p>
       <img
         className={"tutorial_image"}
-        src="../images/sprackDashboard.png"
+        src="Images/sprackDashboard.png"
         alt={"sprack dashboard"}
       />
       <h3 className={"tutorial_header"}>Filter</h3>
@@ -33,7 +33,7 @@ export default function Tutorial(props) {
       </p>
       <img
         className={"tutorial_image"}
-        src="../images/sprackFilter.png"
+        src="Images/sprackFilter.png"
         alt={"sprack dashboard filtering"}
       />
       <h3 className={"tutorial_header"}>Updating Levels</h3>
@@ -45,7 +45,7 @@ export default function Tutorial(props) {
       </p>
       <img
         className={"tutorial_image"}
-        src="../images/sprackUpdateLevels.png"
+        src="Images/sprackUpdateLevels.png"
         alt={"sprack update level"}
       />
       <h3 className={"tutorial_header"}>Adding to the Rack</h3>
@@ -58,7 +58,7 @@ export default function Tutorial(props) {
       </p>
       <img
         className={"tutorial_image"}
-        src="../images/sprackAddSpice.png"
+        src="Images/sprackAddSpice.png"
         alt={"sprack adding a spice"}
       />
       <h3 className={"tutorial_header"}>Editing Names and Deleting Spices</h3>
@@ -70,7 +70,7 @@ export default function Tutorial(props) {
       </p>
       <img
         className={"tutorial_image"}
-        src="../images/sprackNameEdit.png"
+        src="Images/sprackNameEdit.png"
         alt={"sprack editing a name"}
       />
       <div className={"tutorial_button_div"}>
