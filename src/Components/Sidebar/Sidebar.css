@@ -16,7 +16,9 @@
   font-weight: bolder;
   text-align: center;
   align-self: center;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .yes {
