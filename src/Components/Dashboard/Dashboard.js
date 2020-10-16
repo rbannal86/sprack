@@ -157,14 +157,14 @@ export default function Dashboard2(props) {
                 >
                   {favorites.includes(spice) ? (
                     <FavoriteIcon
-                      fontSize="small"
+                      fontSize="inherit"
                       color="secondary"
                       aria-label={"Favorite Spice"}
                       aria-hidden={"false"}
                     />
                   ) : (
                     <FavoriteBorderIcon
-                      fontSize="small"
+                      fontSize="inherit"
                       color="secondary"
                       aria-label={"Add to Favorites"}
                       aria-hidden={"false"}
