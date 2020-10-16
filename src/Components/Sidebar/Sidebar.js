@@ -26,7 +26,6 @@ export default function Sidebar(props) {
 
   return (
     <div className={"sidebar"}>
-      <ReactTooltip event={"float"} />
       <button
         data-tip={"Save Changes"}
         className={"sidebar_button " + spiceLevelChanged}

@@ -46,6 +46,20 @@ const FSServices = {
     }
   },
 
+  async resetSample() {
+    console.log("resetting sample");
+    let userObj = {
+      favorites: ["Salt"],
+      id: "v40DelcKHFR6qh9mEyMCxNPYsfM2",
+      displayName: "Sample S. Spiceman",
+      store: defaultSpices,
+    };
+    await db
+      .collection("users")
+      .doc("v40DelcKHFR6qh9mEyMCxNPYsfM2")
+      .set(userObj);
+  },
+
   async fetchUserData(userId) {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
@@ -75,10 +89,10 @@ const FSServices = {
   },
 
   async submitFeedback(title, body, user) {
-    const data = {title, body, user, new: true}
-    await db.collection('feedback').add(data)
-    console.log('feedback submitted')
-  }
+    const data = { title, body, user, new: true };
+    await db.collection("feedback").add(data);
+    console.log("feedback submitted");
+  },
 };
 
 export default FSServices;

@@ -184,6 +184,7 @@ export default function Dashboard2(props) {
 
   return (
     <>
+      <ReactTooltip place={"right"} effect={"solid"} wrapper={"span"} />
       <Sidebar
         handleSaveSpiceChanges={handleSaveSpiceChanges}
         handleFilterLowSpices={handleFilterLowSpices}
@@ -194,7 +195,6 @@ export default function Dashboard2(props) {
         spiceLevelChanged={spiceLevelChanged}
       />
       <div className={"dashboard_main"}>
-        <ReactTooltip />
         <h3 className={"dashboard_username"}>
           {props.displayName}'s Spice Rack
         </h3>

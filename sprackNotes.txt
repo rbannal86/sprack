@@ -1,6 +1,7 @@
 Go Back To TASKS:
 Lighten background color to increase contrast
 Edit Spice Helper Header Spacing to avoid buttons jumping
+Error from addspice form persisting
 
 colors:
 F26419
