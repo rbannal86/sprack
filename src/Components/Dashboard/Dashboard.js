@@ -28,6 +28,9 @@ export default function Dashboard2(props) {
   let newSpiceNames = {};
   let newSpiceLevels = {};
 
+  if (props.userId === "v40DelcKHFR6qh9mEyMCxNPYsfM2")
+    localStorage.setItem("sprackId", null);
+
   useEffect(() => {
     ReactTooltip.rebuild();
   });

@@ -4,6 +4,7 @@ import Header from "./Components/Header/Header";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Tutorial from "./Components/Tutorial/Tutorial";
 import FSServices from "./Services/FSServices";
 
 function App() {
@@ -15,8 +16,20 @@ function App() {
     FSServices.resetSample();
   };
 
+  const checkLogin = async () => {
+    if (localStorage.sprackId !== null)
+      setUserData(await FSServices.fetchUserData(localStorage.sprackId));
+  };
+
+  useEffect(() => {
+    if (localStorage.sprackId === "v40DelcKHFR6qh9mEyMCxNPYsfM2")
+      localStorage.setItem("sprackId", null);
+    else checkLogin();
+  }, []);
+
   const handleLogOut = () => {
     if (userData.id === "v40DelcKHFR6qh9mEyMCxNPYsfM2") resetSample();
+    localStorage.setItem("sprackId", null);
     setDisplay("");
     setLoggingOut(true);
     setUserData(null);
@@ -75,9 +88,17 @@ function App() {
       {display === "login" ? (
         <UserLogin setUserData={setUserData} setDisplay={setDisplay} />
       ) : null}
+      {display === "tutorial" ? <Tutorial setDisplay={setDisplay} /> : null}
       {display === "" && !userData ? (
         <div id={"app_button_div"}>
-          <button className={"tutorial_button"}>A Quick Tour</button>
+          <button
+            className={"tutorial_button"}
+            onClick={() => {
+              setDisplay("tutorial");
+            }}
+          >
+            A Quick Tour
+          </button>
           <button
             className={"tutorial_button"}
             onClick={(e) => {

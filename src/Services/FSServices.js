@@ -38,6 +38,7 @@ const FSServices = {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
+        localStorage.setItem("sprackId", user.user.uid);
         return user.user.uid;
       })
       .catch((error) => {
@@ -61,6 +62,7 @@ const FSServices = {
         favorites: [],
         store: defaultSpices,
       };
+      localStorage.setItem("sprackId", user.user.uid);
       await db.collection("users").doc(userObj.id).set(userObj);
       return await this.fetchUserData(user.user.uid);
     } catch (error) {
