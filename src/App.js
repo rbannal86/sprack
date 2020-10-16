@@ -4,7 +4,6 @@ import Header from "./Components/Header/Header";
 import UserRegister from "./Components/UserRegister/UserRegister";
 import UserLogin from "./Components/UserLogin/UserLogin";
 import Dashboard from "./Components/Dashboard/Dashboard";
-import Feedback from "./Components/Feedback/Feedback";
 import FSServices from "./Services/FSServices";
 
 function App() {
@@ -89,21 +88,6 @@ function App() {
           </button>
         </div>
       ) : null}
-      {display !== "feedback" ? (
-        <button
-          id={"feedback_button"}
-          onClick={() =>
-            display !== "feedback" ? setDisplay("feedback") : setDisplay("")
-          }
-        >
-          Feedback
-        </button>
-      ) : (
-        <Feedback
-          setDisplay={setDisplay}
-          userId={userData ? userData.id : null}
-        />
-      )}
     </div>
   );
 }

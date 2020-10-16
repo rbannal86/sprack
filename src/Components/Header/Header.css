@@ -54,3 +54,33 @@
 .logout_button {
   margin-top: 7%;
 }
+
+@media only screen and (min-width: 750px) {
+  .header_div {
+    margin-bottom: 0;
+  }
+
+  .header_title {
+    font-size: 5rem;
+  }
+
+  .header_subtitle {
+    font-size: 1.1rem;
+    margin-top: 6%;
+    margin-left: 5%;
+  }
+
+  .header_button {
+    height: 75px;
+    width: 75px;
+    font-size: 0.9rem;
+  }
+
+  .header_buttons {
+    margin-top: 4%;
+  }
+
+  .logout_button {
+    margin-top: 5%;
+  }
+}

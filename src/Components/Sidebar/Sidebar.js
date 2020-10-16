@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ReactTooltip from "react-tooltip";
 import FilterOptions from "../FilterOptions/FilterOptions";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import EditIcon from "@material-ui/icons/Edit";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import FeedbackIcon from "@material-ui/icons/Feedback";
 import "./Sidebar.css";
 
 export default function Sidebar(props) {
@@ -11,6 +11,10 @@ export default function Sidebar(props) {
   const [spiceLevelChanged, setSpiceLevelChanged] = useState("");
   const [toggleEditSpice, setToggleEditSpice] = useState("");
   const [filterOpen, setFilterOpen] = useState("");
+  const [feedbackOpen, setFeedbackOpen] = useState("");
+
+  if (props.showFeedback && feedbackOpen === "") setFeedbackOpen("yes");
+  else if (!props.showFeedback && feedbackOpen === "yes") setFeedbackOpen("");
 
   if (props.editSpiceName && toggleEditSpice === "") setToggleEditSpice("yes");
   else if (!props.editSpiceName && toggleEditSpice === "yes")
@@ -55,6 +59,18 @@ export default function Sidebar(props) {
           favorites={props.handleFilterFavorites}
         />
       ) : null}
+      <button
+        id={"sidebar_feedback_button"}
+        data-tip={"Submit Feedback"}
+        className={"sidebar_button " + feedbackOpen}
+        onClick={() => {
+          props.handleOpenFeedback();
+        }}
+        aria-label={"Open Feedback Form"}
+        aria-hidden={"false"}
+      >
+        <FeedbackIcon aria-label={"Open Feedback Form"} aria-hidden={"false"} />
+      </button>
       {/* {props.filterLowSpices ? (
         <button onClick={() => props.handleFilterLowSpices()}>
           Show All Spices

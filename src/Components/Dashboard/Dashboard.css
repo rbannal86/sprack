@@ -64,3 +64,9 @@
   color: red;
   text-shadow: 1px 1px black;
 }
+
+@media only screen and (min-width: 750px) {
+  .dashboard_main {
+    padding-left: 0;
+  }
+}

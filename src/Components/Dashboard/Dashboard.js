@@ -5,6 +5,7 @@ import AddSpiceBox from "../AddSpiceBox/AddSpiceBox";
 import AddSpiceForm from "../AddSpiceForm/AddSpiceForm";
 import Sidebar from "../Sidebar/Sidebar";
 import PopUpNameEdit from "../PopUpNameEdit/PopUpNameEdit";
+import Feedback from "../Feedback/Feedback";
 import FSServices from "../../Services/FSServices";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -12,6 +13,7 @@ import "./Dashboard.css";
 
 export default function Dashboard2(props) {
   const [showAddSpice, setAddShowSpice] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [filterLowSpices, setFilterLowSpices] = useState(false);
   const [filterFavorites, setFilterFavorites] = useState(false);
   const [editSpiceName, setEditSpiceName] = useState(false);
@@ -89,24 +91,35 @@ export default function Dashboard2(props) {
     setAddShowSpice(!showAddSpice);
   };
 
+  const handleOpenFeedback = () => {
+    setShowFeedback(!showFeedback);
+  };
+
   const handleEditSpiceSubmit = (name) => {
-    setSpiceLevelChanged(false);
-    if (favorites.includes(nameToEdit)) {
-      let updatedFavorites = favorites.filter((spice) => spice !== nameToEdit);
-      if (name.length !== 0) updatedFavorites.push(name);
-      FSServices.updateFavorites(updatedFavorites, props.userId);
-      setFavorites(updatedFavorites);
-    }
-    let updatedStore = store;
-    if (name.length === 0) delete updatedStore[nameToEdit];
+    if (error) setError(null);
+    if (Object.keys(store).includes(name))
+      setError("This spice already exists");
     else {
-      delete Object.assign(updatedStore, { [name]: updatedStore[nameToEdit] })[
-        nameToEdit
-      ];
+      setSpiceLevelChanged(false);
+      if (favorites.includes(nameToEdit)) {
+        let updatedFavorites = favorites.filter(
+          (spice) => spice !== nameToEdit
+        );
+        if (name.length !== 0) updatedFavorites.push(name);
+        FSServices.updateFavorites(updatedFavorites, props.userId);
+        setFavorites(updatedFavorites);
+      }
+      let updatedStore = store;
+      if (name.length === 0) delete updatedStore[nameToEdit];
+      else {
+        delete Object.assign(updatedStore, {
+          [name]: updatedStore[nameToEdit],
+        })[nameToEdit];
+      }
+      setStore(updatedStore);
+      setNameToEdit(null);
+      FSServices.updateStore(store, props.userId);
     }
-    setStore(updatedStore);
-    setNameToEdit(null);
-    FSServices.updateStore(store, props.userId);
   };
 
   const handleEditSpiceName = () => {
@@ -190,6 +203,8 @@ export default function Dashboard2(props) {
         handleFilterLowSpices={handleFilterLowSpices}
         handleEditSpiceName={handleEditSpiceName}
         handleFilterFavorites={handleFilterFavorites}
+        handleOpenFeedback={handleOpenFeedback}
+        showFeedback={showFeedback}
         filterLowSpices={filterLowSpices}
         editSpiceName={editSpiceName}
         spiceLevelChanged={spiceLevelChanged}
@@ -198,7 +213,9 @@ export default function Dashboard2(props) {
         <h3 className={"dashboard_username"}>
           {props.displayName}'s Spice Rack
         </h3>
-
+        {showFeedback ? (
+          <Feedback userId={props.userId} showFeedback={setShowFeedback} />
+        ) : null}
         {error ? <div className={"dashboard_error"}>{error}</div> : null}
         {editSpiceName && !nameToEdit ? (
           <h5 className={"dashboard_edit_header"}>
