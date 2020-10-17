@@ -197,7 +197,12 @@ export default function Dashboard2(props) {
 
   return (
     <>
-      <ReactTooltip place={"right"} effect={"solid"} wrapper={"span"} />
+      <ReactTooltip
+        place={"right"}
+        effect={"solid"}
+        wrapper={"span"}
+        afterShow={() => setTimeout(ReactTooltip.hide, 1000)}
+      />
       <Sidebar
         handleSaveSpiceChanges={handleSaveSpiceChanges}
         handleFilterLowSpices={handleFilterLowSpices}
