@@ -9,12 +9,14 @@ export default function Feedback(props) {
   const [user] = useState(props.userId);
   const [error, setError] = useState(null);
 
+  //submits the feedback info to the database
   const submitFeedback = (e) => {
     e.preventDefault();
     props.showFeedback(false);
     FSServices.submitFeedback(title, body, user);
   };
 
+  //Standard controlled input for React
   const setInputState = (e) => {
     if (error) setError("");
     switch (e.target.id) {
@@ -29,6 +31,7 @@ export default function Feedback(props) {
     }
   };
 
+  //Calls the generic Form component
   return (
     <Form
       submit={submitFeedback}

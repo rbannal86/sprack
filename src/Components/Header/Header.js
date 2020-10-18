@@ -2,6 +2,9 @@ import React from "react";
 import "./Header.css";
 
 const Header = (props) => {
+  //Standard header. Each button calls the appropriate state function from the parent in order to
+  //conditionally render the correct component. If userData is present in the parent component,
+  //a Log Out button in displayed, otherwise a register button and a log in button are present.
   return (
     <div className="header_div">
       <div className={"header_title_div"}>

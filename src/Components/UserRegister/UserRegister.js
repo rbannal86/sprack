@@ -14,6 +14,11 @@ const UserRegister = (props) => {
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
   );
 
+  //Disables the submit button in order to prevent double clicking messing up the registration input. If an error arises
+  //(mismatched password/password doesn't match regex), button reenables. If everything passes the checks, calls
+  //the register function from the service file, creates a new user in the service file with preloaded spices, then
+  //returns that user's data and sets it in the parent component. Nulls out the display to unrender the register form
+  //and allows the dashboard to render.
   const submitRegistration = async (e) => {
     document.getElementById("register_submit_button").disabled = true;
     e.preventDefault();
@@ -38,6 +43,7 @@ const UserRegister = (props) => {
     }
   };
 
+  //Switch is used here to cut down on lines for this controlled React form.
   const setInputState = (e) => {
     if (error) setError("");
     switch (e.target.id) {
@@ -59,6 +65,7 @@ const UserRegister = (props) => {
     }
   };
 
+  //Generic Form component is called here.
   return (
     <Form
       submit={submitRegistration}

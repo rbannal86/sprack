@@ -25,13 +25,16 @@ export default function Dashboard2(props) {
   const [spiceLevelChanged, setSpiceLevelChanged] = useState(false);
   const [error, setError] = useState(null);
 
+  //Variables not tied to state to keep track of changes before submission
   let newSpiceNames = {};
   let newSpiceLevels = {};
 
+  //Prevents the tooltips from disappearing under certain circumstances
   useEffect(() => {
     ReactTooltip.rebuild();
   });
 
+  //When a user adds a spice, updates the local store, then updates the database
   const handleAddSpice = (spice, level) => {
     let updatedStore = store;
     updatedStore[spice] = level;
@@ -39,6 +42,8 @@ export default function Dashboard2(props) {
     FSServices.updateStore(store, props.userId);
   };
 
+  //Clears the variable keeping track of level changes in order to revert to
+  //the non-changed state. Removes the highlight on the save changes button.
   const handleNoChanges = (spice) => {
     if (Object.keys(newSpiceLevels).includes(spice)) {
       delete newSpiceLevels[spice];
@@ -47,12 +52,15 @@ export default function Dashboard2(props) {
       setSpiceLevelChanged(false);
   };
 
+  //Triggers a rerender with setSpiceLevelChange and adds the changed spice
+  //to the newSpiceLevels for future database update
   const handleSpiceLevelChange = (spice, level) => {
     setSpiceLevelChanged(true);
     newSpiceLevels[spice] = 11 - level;
-    console.log(newSpiceLevels);
   };
 
+  //Updates the favorites and triggers a rerender to show the appropriate
+  //favorite icon next to the updated spice
   const handleFavorites = (spice) => {
     let newFavorites = favorites;
     if (newFavorites.includes(spice)) {
@@ -66,10 +74,12 @@ export default function Dashboard2(props) {
     FSServices.updateFavorites(newFavorites, props.userId);
   };
 
+  //Updates the client side store with new spice levels, then updates
+  //the database. Triggers a rerender to clear updated spice level
+  //feedback
   const handleSaveSpiceChanges = () => {
     let updatedStore = store;
     setSpiceLevelChanged(false);
-
     Object.keys(newSpiceLevels).forEach((spice) => {
       Object.assign(updatedStore, { [spice]: newSpiceLevels[spice] });
     });
@@ -79,22 +89,34 @@ export default function Dashboard2(props) {
     newSpiceLevels = {};
   };
 
+  //Toggles the low spice filter
   const handleFilterLowSpices = () => {
     setFilterLowSpices(!filterLowSpices);
   };
 
+  //Toggles the favorites filter
   const handleFilterFavorites = () => {
     setFilterFavorites(!filterFavorites);
   };
 
+  //Toggles the add spice form
   const handleOpenAddSpice = () => {
     setAddShowSpice(!showAddSpice);
   };
 
+  //Toggles the feedback form
   const handleOpenFeedback = () => {
     setShowFeedback(!showFeedback);
   };
 
+  //First checks if an error is present. If so, removes the error. Then, checks
+  //if the spice name is already in use and sets an appropriate error. Then,
+  //toggles the spiceLevelChanged off to render the appropriate new information.
+  //Checks the favorites and updates the name in that list on the client side, then
+  //updates the database. Checks if the new name is empty and deletes the spice, or
+  //deletes the old name from the local store, adds the new name with the old level
+  //and updates the databse. Updates all the appropriate state values to rerender
+  //with the updated dashboard.
   const handleEditSpiceSubmit = (name) => {
     if (error) setError(null);
     if (Object.keys(store).includes(name))
@@ -122,6 +144,7 @@ export default function Dashboard2(props) {
     }
   };
 
+  //Toggles the edit spice name mode
   const handleEditSpiceName = () => {
     if (editSpiceName) {
       handleNameUpdate(nameToEdit);
@@ -130,12 +153,15 @@ export default function Dashboard2(props) {
     setEditSpiceName(!editSpiceName);
   };
 
+  //Modifies the non-state variable, newSpiceNames, when a name is changed
   const handleNameUpdate = (originalName, newName) => {
     let updatedSpiceName = newSpiceNames;
     updatedSpiceName[originalName] = newName;
     newSpiceNames = updatedSpiceName;
   };
 
+  //render function that returns a Box for each spice in alphabetical order
+  //Shows the name of the spice and the favorite icon
   const renderSpices = () => {
     if (storeUpdated) setStoreUpdated(false);
     if (favoritesUpdated) setFavoritesUpdated(false);

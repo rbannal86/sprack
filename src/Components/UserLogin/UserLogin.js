@@ -8,6 +8,9 @@ const UserLogin = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  //Calls the sign in function from the service file. If that succeeds, calls the user data fetch function
+  //from the service file and sets the user data in the parent component and nulls out the display state,
+  //which unrenders the log in component and clears the page for the dashboard component.
   const submitLogin = async (e) => {
     e.preventDefault();
     const login = await FSServices.signInUser(email, password);
@@ -19,6 +22,7 @@ const UserLogin = (props) => {
     }
   };
 
+  //Allows for controlled input for the form. Standard React form stuff.
   const setInputState = (e) => {
     if (error) setError("");
     switch (e.target.id) {
@@ -33,6 +37,7 @@ const UserLogin = (props) => {
     }
   };
 
+  //Generic Form component is called in the render.
   return (
     <Form
       submit={submitLogin}

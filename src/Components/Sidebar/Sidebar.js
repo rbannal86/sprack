@@ -13,6 +13,8 @@ export default function Sidebar(props) {
   const [filterOpen, setFilterOpen] = useState("");
   const [feedbackOpen, setFeedbackOpen] = useState("");
 
+  //The following if/else statements toggle the corresponding buttons
+  //to be conditionally red or yellow based on if they are active
   if (props.showFeedback && feedbackOpen === "") setFeedbackOpen("yes");
   else if (!props.showFeedback && feedbackOpen === "yes") setFeedbackOpen("");
 
@@ -71,16 +73,6 @@ export default function Sidebar(props) {
       >
         <FeedbackIcon aria-label={"Open Feedback Form"} aria-hidden={"false"} />
       </button>
-      {/* {props.filterLowSpices ? (
-        <button onClick={() => props.handleFilterLowSpices()}>
-          Show All Spices
-        </button>
-      ) : (
-        <button onClick={() => props.handleFilterLowSpices()}>
-          Show Only Low Spices
-        </button>
-      )} */}
-      {/* <button onClick={() => props.handleFilterFavorites()}>Favorites</button> */}
     </div>
   );
 }

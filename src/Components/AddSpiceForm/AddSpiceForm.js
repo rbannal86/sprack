@@ -8,6 +8,8 @@ export default function AddSpiceForm(props) {
   const [level, setLevel] = useState(0);
   const [spiceName, setSpiceName] = useState("");
 
+  //standard submit function. Checks the store for a spice with the same name
+  //to prevent duplicates.
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(props.store).includes(spiceName))
@@ -18,6 +20,7 @@ export default function AddSpiceForm(props) {
     }
   };
 
+  //Uses the Box component to allow the user to set the level of the new spice.
   return (
     <form
       className={"add_spice_form"}

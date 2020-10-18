@@ -7,6 +7,8 @@ import "./PopUpNameEdit.css";
 export default function PopUpNameEdit(props) {
   const [input, setInput] = useState(props.spiceName);
 
+  //renders a form that allows the user to either rename the spice
+  //or delete the spice.
   return (
     <div className={"popup_form"}>
       <form className={"name_edit_form"}>

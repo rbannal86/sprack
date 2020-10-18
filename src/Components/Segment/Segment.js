@@ -2,6 +2,10 @@ import React from "react";
 import "./Segment.css";
 
 export default function Segment(props) {
+  //The render for each separate segment in a spice Box. Has separate onEvents for use on desktop and mobile.
+  //document.elementFromPoint is a workaround for the onTouch creation of a touch point and works
+  //based off of that original touch point creation. onClick also "unlocks" the box to avoid
+  //overly-sensitive level selection.
   return (
     <div
       className={"segment_main " + props.status}

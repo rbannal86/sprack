@@ -1,6 +1,7 @@
 import app from "./Base";
 const db = app.firestore();
 
+//Default spices for a new user
 const defaultSpices = {
   Salt: 1,
   Pepper: 2,
@@ -9,6 +10,7 @@ const defaultSpices = {
   "Chili Powder": 5,
 };
 
+//Default spices for the sample account
 const sampleSpices = {
   Salt: 1,
   Pepper: 2,
@@ -33,6 +35,7 @@ const sampleSpices = {
 };
 
 const FSServices = {
+  //Signs in user, return either an error or the userId which is used to fetch user data.
   async signInUser(email, password) {
     return await app
       .auth()
@@ -50,6 +53,8 @@ const FSServices = {
       });
   },
 
+  //Standard firebase register function, followed by creating a new user with the userObj
+  //as preset data. Local storage is set with the userId for persistent login.
   async registerNewUser(email, password, displayName) {
     console.log("registering new user");
     try {
@@ -71,6 +76,7 @@ const FSServices = {
     }
   },
 
+  //resets the sample data to the default
   async resetSample() {
     console.log("resetting sample");
     let userObj = {
@@ -85,6 +91,7 @@ const FSServices = {
       .set(userObj);
   },
 
+  //returns user data
   async fetchUserData(userId) {
     let userRef = db.collection("users").doc(userId);
     let getDoc = userRef
@@ -102,17 +109,20 @@ const FSServices = {
     return getDoc;
   },
 
+  //updates store with changes to the client side store
   async updateStore(store, userId) {
     let userRef = db.collection("users").doc(userId);
     userRef.update({ store: store });
   },
 
+  //updates favorites with changes to the client side favorites
   async updateFavorites(favorites, userId) {
     let userRef = db.collection("users").doc(userId);
     if (favorites.length === 0) userRef.update({ favorites: [] });
     else userRef.update({ favorites: favorites });
   },
 
+  //submits feedback received from the feedback form
   async submitFeedback(title, body, user) {
     const data = { title, body, user, new: true };
     await db.collection("feedback").add(data);
